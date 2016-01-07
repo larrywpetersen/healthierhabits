@@ -1,0 +1,32 @@
+
+{% include 'healthierhabits/base_start.html' %}
+
+{% include 'healthierhabits/common/base_start.html' %}
+
+
+<blockquote>
+
+  <h1>Healthier Habits</h1>
+
+  <h2>{{ subgroup }} Home</h2>
+
+  <p>
+    This is the {{ subgroup }} home page.
+  </p>
+
+  <ul>
+
+    {% for link in all_links %}
+    <li><a href="{{ link.file }}">{{ link.name }}</a></li>
+
+    {% endfor %}
+
+  </ul>
+
+</blockquote>
+
+
+{% include 'healthierhabits/common/base_finish.html' %}
+
+{% include 'healthierhabits/base_finish.html' %}
+

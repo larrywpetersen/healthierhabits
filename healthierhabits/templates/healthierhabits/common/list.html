@@ -1,0 +1,53 @@
+
+{% include 'healthierhabits/base_start.html' %}
+{% with 'healthierhabits/'|add:subgroup|lower|add:'/base_start.html' as base_start %}
+{% include base_start %}
+{% endwith %}
+
+
+<blockquote>
+
+  <h1>Healthier Habits</h1>
+
+  <h2>{{ subgroup }} List</h2>
+
+</blockquote>
+
+
+{% if all_rows %}
+
+  <ul>
+
+    {% with 'healthierhabits/'|add:subgroup|lower|add:'/table_start.html' as table_start %}
+    {% include table_start %}
+    {% endwith %}
+
+
+      {% for row in all_rows %}
+
+        {% with 'healthierhabits/'|add:subgroup|lower|add:'/table_one_row.html' as table_row %}
+        {% include table_row %}
+        {% endwith %}
+
+      {% endfor %}
+
+    {% with 'healthierhabits/'|add:subgroup|lower|add:'/table_finish.html' as table_finish %}
+    {% include table_finish %}
+    {% endwith %}
+
+  </ul>
+
+{% else %}
+
+  <p>
+    There are no {{ subgroup }} yet.<br>
+  </p>
+
+{% endif %}
+
+
+{% with 'healthierhabits/'|add:subgroup|lower|add:'/base_finish.html' as base_finish %}
+{% include base_finish %}
+{% endwith %}
+{% include 'healthierhabits/base_finish.html' %}
+

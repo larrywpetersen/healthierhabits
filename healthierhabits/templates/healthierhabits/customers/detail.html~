@@ -1,0 +1,148 @@
+
+{% include 'healthierhabits/base_start.html' %}
+
+{% include 'healthierhabits/groups/base_start.html' %}
+
+
+<blockquote>
+
+  <h1>Healthier Habits</h1>
+
+  <h2>Details of {{ customer.name_string }}</h2>
+
+</blockquote>
+
+
+<br>
+<br>
+
+  <table border="0" width="80%">
+
+    <tr>
+      <td align="right" width="50">
+	Customer ID:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.id }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right" width="150">
+	First Name:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.firstname }}
+	<input type="text" name="firstname" id="1" />
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right" width="150">
+	Last Name:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.lastname }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Address1:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.address1}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Address2:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.address2 }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	City:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.city }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	State:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.state }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Zip:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.zip }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	email address1:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.email1 }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	email address2:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.email2 }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Phone1:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.phone1 }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Phone2:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.phone2 }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Group:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.group.name_string }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Current Points:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.current_points }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Lifetime Points:&nbsp;&nbsp;
+      </td><td>
+	{{ customer.life_points }}
+      </td>
+    </tr>
+
+  </table>
+
+
+  {% include 'healthierhabits/groups/base_finish.html' %}
+
+  {% include 'healthierhabits/base_finish.html' %}
+

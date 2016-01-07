@@ -1,0 +1,45 @@
+
+{% include 'healthierhabits/base_start.html' %}
+
+{% include 'healthierhabits/customers/base_start.html' %}
+
+
+<blockquote>
+
+  <h1>Healthier Habits</h1>
+
+  <h2>Customers List</h2>
+
+</blockquote>
+
+
+{% if all_customers %}
+
+  <ul>
+
+    {% include 'healthierhabits/customers/table_start.html' %}
+
+
+      {% for customer in all_customers %}
+
+        {% include 'healthierhabits/customers/table_one_row.html' %}
+
+      {% endfor %}
+
+    {% include 'healthierhabits/customers/table_finish.html' %}
+
+  </ul>
+
+{% else %}
+
+  <p>
+    There are no customers yet.<br>
+  </p>
+
+{% endif %}
+
+
+{% include 'healthierhabits/customers/base_finish.html' %}
+
+{% include 'healthierhabits/base_finish.html' %}
+

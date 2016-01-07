@@ -1,0 +1,45 @@
+
+{% include 'healthierhabits/base_start.html' %}
+
+{% include 'healthierhabits/rewards/base_start.html' %}
+
+
+<blockquote>
+
+  <h1>Healthier Habits</h1>
+
+  <h2>Reward Added Successfully</h2>
+
+</blockquote>
+
+
+{% if new_reward %}
+
+  <ul>
+
+    {% include 'healthierhabits/rewards/table_start.html' %}
+
+
+      {% for reward in new_reward %}
+
+        {% include 'healthierhabits/rewards/table_one_row.html' %}
+
+      {% endfor %}
+
+    {% include 'healthierhabits/rewards/table_finish.html' %}
+
+  </ul>
+
+{% else %}
+
+  <p>
+    There are no rewards yet.<br>
+  </p>
+
+{% endif %}
+
+
+{% include 'healthierhabits/rewards/base_finish.html' %}
+
+{% include 'healthierhabits/base_finish.html' %}
+
