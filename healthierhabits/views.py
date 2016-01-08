@@ -54,11 +54,41 @@ def groups_add_action( request):
 
 def groups_list(request):
     subgroup = 'Groups'
-    all_rows = Groups.objects.all()[::-1]
+    all_rows = Groups.objects.order_by( 'name')
     context = {}
     context[ 'subgroup' ] = subgroup
     context[ 'all_rows' ] = all_rows
     return render( request, 'healthierhabits/common/list.html', context)
+
+
+def groups_detail( request, groupid):
+    group = Groups.objects.get( id=groupid)
+    context = {}
+    context[ 'group'] = group
+    return render( request, 'healthierhabits/groups/detail.html', context)
+
+
+def groups_edit( request, groupid):
+    group = Groups.objects.get( id=groupid)
+    context = {}
+    context[ 'group'] = group
+    return render( request, 'healthierhabits/groups/edit.html', context)
+
+
+def groups_edit_action( request):
+    groupid = request.POST[ 'id' ]
+    group = Groups.objects.get( id=groupid)
+    group.name = request.POST[ 'name']
+    group.address1 = request.POST[ 'address1']
+    group.address2 = request.POST[ 'address2']
+    group.city = request.POST[ 'city']
+    group.state = request.POST[ 'state']
+    group.zip = request.POST[ 'zip']
+    group.email = request.POST[ 'email']
+    group.phone = request.POST[ 'phone']
+    group.save()
+    context = { 'new_group' : [ group] }
+    return render( request, 'healthierhabits/groups/edit_confirm.html', context)
 
 
 def groups_csv( request):
@@ -106,11 +136,43 @@ def rewards_add_action( request):
 
 def rewards_list(request):
     subgroup = 'Rewards'
-    all_rows = Rewards.objects.all()[::-1]
+    all_rows = Rewards.objects.order_by( 'group__name')
     context = {}
     context[ 'subgroup' ] = subgroup
     context[ 'all_rows' ] = all_rows
     return render( request, 'healthierhabits/common/list.html', context)
+
+
+def rewards_detail( request, rewardid):
+    reward = Rewards.objects.get( id=rewardid)
+    context = {}
+    context[ 'reward'] = reward
+    return render( request, 'healthierhabits/rewards/detail.html', context)
+
+
+def rewards_edit( request, rewardid):
+    reward = Rewards.objects.get( id=rewardid)
+    all_groups = Groups.objects.all()
+    context = {}
+    context[ 'reward'] = reward
+    context[ 'all_groups'] = all_groups
+    return render( request, 'healthierhabits/rewards/edit.html', context)
+
+
+def rewards_edit_action( request):
+    rewardid = request.POST[ 'id' ]
+    reward = Rewards.objects.get( id=rewardid)
+    reward.group = Groups.objects.get( id = request.POST[ 'group'])
+    reward.name = request.POST[ 'name']
+    reward.price = request.POST[ 'price']
+    if( request.POST[ 'available' ] == 'Yes'):
+        reward.available = True
+    else:
+        reward.available = False
+    reward.number_given = request.POST[ 'number_given']
+    reward.save()
+    context = { 'new_reward' : [ reward] }
+    return render( request, 'healthierhabits/rewards/edit_confirm.html', context)
 
 
 def rewards_csv( request):
@@ -170,7 +232,7 @@ def customers_add_action( request):
 
 def customers_list(request):
     subgroup = 'Customers'
-    all_rows = Customers.objects.all()[::-1]
+    all_rows = Customers.objects.order_by( 'lastname', 'firstname')
     context = {}
     context[ 'subgroup' ] = subgroup
     context[ 'all_rows' ] = all_rows
@@ -236,11 +298,19 @@ def orders_add_action( request):
 
 def orders_list(request):
     subgroup = 'Orders'
-    all_rows = Orders.objects.all()[::-1]
+#    all_rows = Orders.objects.all()[::-1]
+    all_rows = Orders.objects.order_by( '-date', 'customer__lastname', 'customer__firstname')
     context = {}
     context[ 'subgroup' ] = subgroup
     context[ 'all_rows' ] = all_rows
     return render( request, 'healthierhabits/common/list.html', context)
+
+
+def orders_detail( request, orderid):
+    order = Orders.objects.get( id=orderid)
+    context = {}
+    context[ 'order'] = order
+    return render( request, 'healthierhabits/orders/detail.html', context)
 
 
 def orders_csv( request):

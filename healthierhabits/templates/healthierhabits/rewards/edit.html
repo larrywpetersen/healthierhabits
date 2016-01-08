@@ -1,0 +1,103 @@
+
+{% include 'healthierhabits/base_start.html' %}
+
+{% include 'healthierhabits/rewards/base_start.html' %}
+
+
+<blockquote>
+
+  <h1>Healthier Habits</h1>
+
+  <h2>Edit the {{ reward.name_string }} Reward</h2>
+
+</blockquote>
+
+
+<br>
+<br>
+
+<form action="../edit_action" method="post">
+
+  {% csrf_token %}
+
+  <input type="hidden" name="id" value="{{ reward.id }}">
+
+  <table border="0" width="80%">
+
+  
+    <tr>
+      <td align="right">
+	<label for="1">Group:&nbsp;&nbsp;</label>
+      </td><td>
+
+	<select name="group">
+	  {% for group in all_groups %}
+	  <option value="{{ group.id }}"
+		  {% if reward.group.id == group.id %}
+		  selected="selected"
+		  {% endif %}>
+	    {{ group.name_string }}</option>
+	  {% endfor %}
+	</select>
+	
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right" width="150">
+	<label for="1">Name:&nbsp;&nbsp;</label>
+      </td><td>
+	<input type="text" name="name" id="1" value="{{ reward.name }}" />
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	<label for="3">price:&nbsp;&nbsp;</label>
+      </td><td>
+	<input type="text" name="price" id="3" value="{{ reward.price }}" />
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	<label for="4">Availability:&nbsp;&nbsp;</label>
+      </td><td>
+	<input type="radio" name="available" id="4"
+	       {% if reward.available == True %}checked{% endif %}
+	       value="Yes">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</input>
+	<input type="radio" name="available" id="4"
+	       {% if reward.available == False %}checked{% endif %}
+	       value="No">No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</input>
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	<label for="5">Number Given:&nbsp;&nbsp;</label>
+      </td><td>
+	<input type="text" name="number_given" id="5" value="{{ reward.number_given }}" />
+      </td>
+    </tr>
+
+
+    <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+    <tr>
+      <td>
+	&nbsp;
+      </td><td>
+	<input type="submit" value="Submit Edits" />
+      </td>
+    </tr>
+
+  </table>
+
+</form>
+
+
+<!--
+  {% include 'healthierhabits/rewards/base_finish.html' %}
+
+  {% include 'healthierhabits/base_finish.html' %}
+  -->

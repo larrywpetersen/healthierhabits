@@ -1,0 +1,79 @@
+
+{% include 'healthierhabits/base_start.html' %}
+
+{% include 'healthierhabits/rewards/base_start.html' %}
+
+
+<blockquote>
+
+  <h1>Healthier Habits</h1>
+
+  <h2>Details of {{ reward.name_string }}</h2>
+
+</blockquote>
+
+
+<br>
+<br>
+
+  <table border="0" width="80%">
+
+    <tr>
+      <td align="right" width="50">
+	Reward ID:&nbsp;&nbsp;
+      </td><td>
+	{{ reward.id }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right" width="150">
+	Group Name:&nbsp;&nbsp;
+      </td><td>
+	{{ reward.group.name_string }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right" width="150">
+	Name:&nbsp;&nbsp;
+      </td><td>
+	{{ reward.name }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Price:&nbsp;&nbsp;
+      </td><td>
+	{{ reward.price }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Availability:&nbsp;&nbsp;
+      </td><td>
+	{{ reward.available_yn }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Number Given:&nbsp;&nbsp;
+      </td><td>
+	{{ reward.number_given }}
+      </td>
+    </tr>
+
+  </table>
+
+  <h3><a href="../edit/{{ reward.id }}">Edit Reward</a></h3>
+  <br><br>
+
+
+  <!--
+  {% include 'healthierhabits/rewards/base_finish.html' %}
+
+  {% include 'healthierhabits/base_finish.html' %}
+  -->

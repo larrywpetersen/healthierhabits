@@ -78,7 +78,7 @@ class Orders( models.Model):
         msg = self.pretty_print() + '  (' + self.nice_filled() + ')'
         return msg
     def name_string( self):
-        return self.customer
+        return self.customer.name_string()
     def nice_date(self):
         msg = self.date.strftime( '%b %d, %Y')
         return msg

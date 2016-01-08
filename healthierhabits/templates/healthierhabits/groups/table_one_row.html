@@ -2,9 +2,9 @@
     <tr>
 
       <td align="center">
-        {{ row.id }}
+	{{ row.id }}
       </td><td align="center">
-        {{ row.name }}
+        <a href="detail/{{ row.id }}">{{ row.name }}</a>
       </td><td align="center">
         {{ row.address1 }}, {{ row.city }}, {{ row.state }}
       </td>
