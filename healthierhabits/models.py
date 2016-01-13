@@ -18,6 +18,10 @@ class Groups( models.Model):
     def name_string( self):
         msg = self.name
         return msg
+    def address_string( self):
+        msg = self.address1 + ', ' + self.city + ', '
+        msg = msg + self.state + ', ' + self.zip
+        return msg
 
 
 
@@ -67,7 +71,6 @@ class Customers( models.Model):
 
 
 class Orders( models.Model):
-#    customer = models.CharField( max_length = 200)
     customer = models.ForeignKey( Customers)
     date = models.DateTimeField( 'purchase date', default = timezone.now )
     item = models.CharField( max_length = 200)

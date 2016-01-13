@@ -8,19 +8,19 @@
 
   <h1>Healthier Habits</h1>
 
-  <h2>Customers List</h2>
+  <h2>Customer Edited Successfully</h2>
 
 </blockquote>
 
 
-{% if all_customers %}
+{% if new_customer %}
 
   <ul>
 
     {% include 'healthierhabits/customers/table_start.html' %}
 
 
-      {% for customer in all_customers %}
+      {% for row in new_customer %}
 
         {% include 'healthierhabits/customers/table_one_row.html' %}
 

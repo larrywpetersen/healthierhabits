@@ -1,0 +1,62 @@
+
+{% include 'healthierhabits/base_start.html' %}
+
+{% include 'healthierhabits/orders/base_start.html' %}
+
+
+<blockquote>
+
+  <h1>Healthier Habits</h1>
+
+  <h2>Details of Order for {{ order.item }}
+    by {{order.customer.name_string }} </h2>
+
+</blockquote>
+
+
+<br>
+<br>
+
+
+
+  {% csrf_token %}
+
+  <table border="0" width="80%">
+
+    <tr>
+      <td align="right" width="150">
+	Customer:&nbsp;&nbsp;
+      </td><td>
+	{{ order.customer.name_string }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Item:&nbsp;&nbsp;
+      </td><td>
+	{{ order.item }}
+      </td>
+    </tr>
+
+    <tr>
+      <td align="right">
+	Price:&nbsp;&nbsp;
+      </td><td>
+	{{ order.price }}
+      </td>
+    </tr>
+
+
+  </table>
+
+</form>
+
+<h3><a href="../edit/{{ order.id }}">Edit Order</a></h3>
+<br><br>
+
+<!--
+  {% include 'healthierhabits/orders/base_finish.html' %}
+
+  {% include 'healthierhabits/base_finish.html' %}
+  -->

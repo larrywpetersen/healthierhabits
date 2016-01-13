@@ -221,7 +221,7 @@ def customers_add_action( request):
     customer.email1 = request.POST[ 'email1']
     customer.email2 = request.POST[ 'email2']
     customer.phone1 = request.POST[ 'phone1']
-    customer.phone1 = request.POST[ 'phone2']
+    customer.phone2 = request.POST[ 'phone2']
     customer.group = Groups.objects.get( id = request.POST[ 'group'] )
     customer.current_points = request.POST[ 'current_points']
     customer.life_points = request.POST[ 'life_points']
@@ -244,6 +244,37 @@ def customers_detail( request, customerid):
     context = {}
     context[ 'customer'] = customer
     return render( request, 'healthierhabits/customers/detail.html', context)
+
+
+def customers_edit( request, customerid):
+    customer = Customers.objects.get( id=customerid)
+    all_groups = Groups.objects.all()
+    context = {}
+    context[ 'customer'] = customer
+    context[ 'all_groups'] = all_groups
+    return render( request, 'healthierhabits/customers/edit.html', context)
+
+
+def customers_edit_action( request):
+    customerid = request.POST[ 'id']
+    customer = Customers.objects.get( id=customerid)
+    customer.firstname = request.POST[ 'firstname']
+    customer.lastname = request.POST[ 'lastname']
+    customer.address1 = request.POST[ 'address1']
+    customer.address2 = request.POST[ 'address2']
+    customer.city = request.POST[ 'city']
+    customer.state = request.POST[ 'state']
+    customer.zip = request.POST[ 'zip']
+    customer.email1 = request.POST[ 'email1']
+    customer.email2 = request.POST[ 'email2']
+    customer.phone1 = request.POST[ 'phone1']
+    customer.phone2 = request.POST[ 'phone2']
+    customer.group = Groups.objects.get( id = request.POST[ 'group'] )
+    customer.current_points = request.POST[ 'current_points']
+    customer.life_points = request.POST[ 'life_points']
+    customer.save()
+    context = { 'new_customer' : [ customer] }
+    return render( request, 'healthierhabits/customers/add_confirm.html', context)
 
 
 def customers_csv( request):
@@ -312,6 +343,30 @@ def orders_detail( request, orderid):
     context[ 'order'] = order
     return render( request, 'healthierhabits/orders/detail.html', context)
 
+
+def orders_edit( request, orderid):
+    order = Orders.objects.get( id=orderid)
+    all_customers = Customers.objects.all()
+#    all_rewards = Rewards.objects.all()
+    context = {}
+    context[ 'order'] = order
+    context[ 'all_customers'] = all_customers
+#    context[ 'all_rewards'] = all_rewards
+    return render( request, 'healthierhabits/orders/edit.html', context)
+
+
+def orders_edit_action( request):
+    orderid = request.POST[ 'id']
+    order = Orders.objects.get( id=orderid)
+    order.customer = Customers.objects.get( id = request.POST[ 'customer'] )
+    order.item = Rewards.objects.get( id = request.POST[ 'item'])
+    order.price = request.POST[ 'price']
+    order.date = timezone.now()
+    order.filled = False
+    order.save()
+    context = { 'new_order' : [ order] }
+    return render( request, 'healthierhabits/orders/add_confirm.html', context)
+    
 
 def orders_csv( request):
     orders = Orders.objects.all()

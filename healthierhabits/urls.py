@@ -21,6 +21,8 @@ urlpatterns = [
     url( r'^customers/add_action$', views.customers_add_action, name='customers_add_action'),
     url( r'^customers/list$', views.customers_list, name='customers_list'), 
     url( r'^customers/detail/(?P<customerid>[0-9]*)$', views.customers_detail, name='customers_detail'), 
+    url( r'^customers/edit/(?P<customerid>[0-9]*)$', views.customers_edit, name='customers_edit'), 
+    url( r'^customers/edit_action$', views.customers_edit_action, name='customers_edit_action'), 
     url( r'^customers/csv$', views.customers_csv, name='customers_csv'), 
 
 
@@ -29,6 +31,7 @@ urlpatterns = [
     url( r'^orders/add_action$', views.orders_add_action, name='orders_add_action'),
     url( r'^orders/list$', views.orders_list, name='orders_list'),
     url( r'^orders/detail/(?P<orderid>[0-9]*)$', views.orders_detail, name='orders_detail'), 
+    url( r'^orders/edit/(?P<orderid>[0-9]*)$', views.orders_edit, name='orders_edit'), 
     url( r'^orders/csv$', views.orders_csv, name='orders_csv'),
     
 

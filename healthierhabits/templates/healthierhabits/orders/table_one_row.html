@@ -1,17 +1,18 @@
 
-    <tr>
+    <tr class="list">
 
-      <td align="center">
+      <td class="list">
         {{ row.id }}
-      </td><td align="center">
+      </td><td class="list">
         {{ row.date_string }}
-      </td><td align="center">
-        {{ row.name_string }}
-      </td><td align="center">
-        {{ row.item }}
-      </td><td align="center">
+      </td><td class="list">
+	{{ row.name_string }}
+      </td><td class="list">
+	<a href="detail/{{ row.id }}">
+          {{ row.item }}</a>
+      </td><td class="list">
         {{ row.price }} points
-      </td><td align="center">
+      </td><td class="list">
         {{ row.filled_yn }}
       </td>
 

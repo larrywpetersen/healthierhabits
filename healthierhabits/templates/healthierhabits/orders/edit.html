@@ -8,7 +8,8 @@
 
   <h1>Healthier Habits</h1>
 
-  <h2>Add an Order</h2>
+  <h2>Edit the Order for {{ order.item }}
+    by {{order.customer.name_string }} </h2>
 
 </blockquote>
 
@@ -26,42 +27,38 @@
       <td align="right" width="150">
 	<label for="1">Customer:&nbsp;&nbsp;</label>
       </td><td>
-
 	<select name="customer">
 	  {% for customer in all_customers %}
-
-	  <option value="{{ customer.id }}">
+	  <option value="{{ customer.id }}"
+		  {% if order.customer.id == customer.id %}
+		  selected="selected"
+		  {% endif %}>
 	    {{ customer.name_string }}</option>
-
 	{% endfor %}
 	</select>
 
       </td>
     </tr>
 
-  <!--
-    <tr>
-      <td align="right" width="150">
-	<label for="1">Customer:&nbsp;&nbsp;</label>
-      </td><td>
-	<input type="text" name="customer" id="1" />
-      </td>
-    </tr>
-    -->
   
     <tr>
       <td align="right">
 	<label for="3">Item:&nbsp;&nbsp;</label>
       </td><td>
+	{{ order.item }}
 
+<!--
 	<select name="item">
 	{% for reward in all_rewards %}
 
-	  <option value="{{ reward.id }}">
+	<option value="{{ reward.id }}"
+		{% if order.reward == reward.id %}selected="selected"
+		{% endif %}>
 	    {{ reward.name_string }}</option>
 
 	{% endfor %}
 	</select>
+  -->
 
       </td>
     </tr>
@@ -70,7 +67,7 @@
       <td align="right">
 	<label for="4">Price:&nbsp;&nbsp;</label>
       </td><td>
-	<input type="text" name="price" id="4" />
+	<input type="text" name="price" id="4" value="{{ order.price }}" />
       </td>
     </tr>
 
@@ -81,7 +78,7 @@
       <td>
 	&nbsp;
       </td><td>
-	<input type="submit" value="Add Order" />
+	<input type="submit" value="Submit Edits" />
       </td>
     </tr>
 
@@ -89,8 +86,9 @@
 
 </form>
 
-
+<br>
+<!--
   {% include 'healthierhabits/orders/base_finish.html' %}
 
   {% include 'healthierhabits/base_finish.html' %}
-
+  -->
