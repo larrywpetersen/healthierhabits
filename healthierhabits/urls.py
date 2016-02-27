@@ -43,7 +43,9 @@ urlpatterns = [
     url( r'^rewards/edit/(?P<rewardid>[0-9]*)$', views.rewards_edit, name='rewards_edit'), 
     url( r'^rewards/edit_action$', views.rewards_edit_action, name='rewards_edit_action'), 
     url( r'^rewards/csv$', views.rewards_csv, name='rewards_csv'),
-    
+
+
+    url( r'^orders/get_rewards_for_customer/$', views.get_rewards_for_customer, name='get_rewards_for_customer'),
 
 ]
 

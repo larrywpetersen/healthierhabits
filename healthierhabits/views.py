@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
 
@@ -232,7 +233,8 @@ def customers_add_action( request):
 
 def customers_list(request):
     subgroup = 'Customers'
-    all_rows = Customers.objects.order_by( 'lastname', 'firstname')
+#    all_rows = Customers.objects.order_by( 'lastname', 'firstname')
+    all_rows = Customers.objects.order_by(  'firstname', 'lastname')
     context = {}
     context[ 'subgroup' ] = subgroup
     context[ 'all_rows' ] = all_rows
@@ -309,7 +311,8 @@ def orders_home(request):
 
 
 def orders_add( request):
-    all_customers = Customers.objects.all()[::-1]
+#    all_customers = Customers.objects.all()[::-1]
+    all_customers = Customers.objects.order_by( 'firstname', 'lastname')
     all_rewards = Rewards.objects.all()[::-1]
     context = { 'all_customers' : all_customers, 'all_rewards' : all_rewards }
     return render( request, 'healthierhabits/orders/add.html', context)
@@ -319,7 +322,7 @@ def orders_add_action( request):
     order = Orders()
     order.customer = Customers.objects.get( id = request.POST[ 'customer'] )
     order.item = Rewards.objects.get( id = request.POST[ 'item'])
-    order.price = request.POST[ 'price']
+    order.price = order.item.price
     order.date = timezone.now()
     order.filled = False
     order.save()
@@ -329,7 +332,6 @@ def orders_add_action( request):
 
 def orders_list(request):
     subgroup = 'Orders'
-#    all_rows = Orders.objects.all()[::-1]
     all_rows = Orders.objects.order_by( '-date', 'customer__lastname', 'customer__firstname')
     context = {}
     context[ 'subgroup' ] = subgroup
@@ -378,5 +380,24 @@ def orders_csv( request):
         msg = msg + o.date_string() + ', ' + o.item + ', '
         msg = msg + str( o.price) + ', ' + o.filled_yn() + '<br>'
     return HttpResponse( msg)
+
+
+
+
+
+
+def get_rewards_for_customer( request):
+    cid = request.GET.get( 'cid')
+    customer = Customers.objects.get( id = cid)
+    my_rewards = Rewards.objects.filter( group = customer.group).order_by( 'name')
+    jsondata = []
+    for reward in my_rewards:
+        tmp = {}
+        tmp[ 'name' ] = reward.name
+        tmp[ 'price' ] = reward.price
+        tmp[ 'id' ] = reward.id
+        jsondata.append( tmp)
+    return JsonResponse( jsondata, safe=False)
+
 
 
