@@ -94,7 +94,7 @@
   };
 
   function getrewards()  {
-    url = "get_rewards_for_customer/?cid=";
+    url = "../get_rewards_for_customer/?cid=";
     url += document.getElementById( "cust_sel").value ;
     xmlhttp.open("GET", url, true);
     xmlhttp.send();

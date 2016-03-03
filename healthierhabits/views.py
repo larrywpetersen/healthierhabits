@@ -384,8 +384,32 @@ def orders_csv( request):
 
 
 
+##########################################################
+#
+#    Service / API views
+#
+##########################################################
 
 
+
+##########################################################
+#
+#   get_rewards_for_customer
+#
+#       Call with GET and an argument pid with a value
+#       that is the customer id whose rewards you want
+#
+#       returns a JSON with the rewards that are
+#       available for that customer
+#
+#           [
+#             { 'name':name,
+#               'price':price,
+#               'id':reward.id   },
+#             .....
+#           ]
+#
+##########################################################
 def get_rewards_for_customer( request):
     cid = request.GET.get( 'cid')
     customer = Customers.objects.get( id = cid)
@@ -398,6 +422,94 @@ def get_rewards_for_customer( request):
         tmp[ 'id' ] = reward.id
         jsondata.append( tmp)
     return JsonResponse( jsondata, safe=False)
+
+
+##########################################################
+#
+#   get_customer_profile
+#
+#       Call with GET and an argument pid with a value
+#       that is the customer id whose profile you want
+#
+#       returns a JSON with the customer profile info
+#
+#           [
+#             { 'firstname':firstname,
+#               'lastname':lastname,
+#               'address1':address1,
+#               'address2':address2,
+#               'city':city,
+#               'state':state,
+#               'zip':zip,
+#               'email1':email1,
+#               'email2':email2,
+#               'phone1':phone1,
+#               'phone2':phone2,
+#               'group':group,
+#               'current_points':current_points,
+#               'life_points':life_points   }
+#           ]
+#
+##########################################################
+def get_customer_profile( request):
+    cid = request.GET.get( 'cid')
+    customer = Customers.objects.get( id = cid)
+    jsondata = []
+    tmp = {}
+    tmp[ 'firstname' ] = customer.firstname
+    tmp[ 'lastname' ] = customer.lastname
+    tmp[ 'address1' ] = customer.address1
+    tmp[ 'address2' ] = customer.address2
+    tmp[ 'city' ] = customer.city
+    tmp[ 'state' ] = customer.state
+    tmp[ 'zip' ] = customer.zip
+    tmp[ 'email1' ] = customer.email1
+    tmp[ 'email2' ] = customer.email2
+    tmp[ 'phone1' ] = customer.phone1
+    tmp[ 'phone2' ] = customer.phone2
+    tmp[ 'group' ] = customer.group.name_string()
+    tmp[ 'current_points' ] = customer.current_points
+    tmp[ 'life_points' ] = customer.life_points
+    jsondata.append( tmp)
+    return JsonResponse( jsondata, safe=False)
+
+
+##########################################################
+#
+#   get_customer_orders
+#
+#       Call with GET and an argument pid with a value
+#       that is the customer id whose profile you want
+#
+#       returns a JSON with the orders from this customer
+#
+#           [
+#             { 'id':id
+#               'date':date
+#               'item':item
+#               'price':price   },
+#             ....
+#           ]
+#
+##########################################################
+def get_customer_orders( request):
+    cid = request.GET.get( 'cid')
+    customer = Customers.objects.get( id = cid)
+    my_orders = Orders.objects.filter( customer = cid).order_by( '-date')
+    jsondata = []
+    for order in my_orders:
+        tmp = {}
+        tmp[ 'id' ] = order.id
+        tmp[ 'date' ] = order.date_string()
+        tmp[ 'item' ] = order.item
+        tmp[ 'price' ] = order.price
+        tmp[ 'filled' ] = order.filled_yn()
+        jsondata.append( tmp)
+    return JsonResponse( jsondata, safe=False)
+
+
+
+
 
 
 
