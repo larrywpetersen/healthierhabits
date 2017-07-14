@@ -24,10 +24,10 @@
 
     <tr>
       <td align="right" width="150">
-	<label for="1">Customer:&nbsp;&nbsp;</label>
+	<label>Customer:&nbsp;&nbsp;</label>
       </td><td>
 
-	<select name="customer">
+	<select name="customer" id="cust_sel" onchange="getrewards()">
 	  {% for customer in all_customers %}
 
 	  <option value="{{ customer.id }}">
@@ -39,28 +39,17 @@
       </td>
     </tr>
 
-  <!--
-    <tr>
-      <td align="right" width="150">
-	<label for="1">Customer:&nbsp;&nbsp;</label>
-      </td><td>
-	<input type="text" name="customer" id="1" />
-      </td>
-    </tr>
-    -->
-  
+
     <tr>
       <td align="right">
-	<label for="3">Item:&nbsp;&nbsp;</label>
+	<label>Item:&nbsp;&nbsp;</label>
       </td><td>
 
-	<select name="item">
-	{% for reward in all_rewards %}
-
-	  <option value="{{ reward.id }}">
-	    {{ reward.name_string }}</option>
-
-	{% endfor %}
+	<select name="item" id="item" onchange="show_price()">
+<!--
+	  <option value="{{ customer.id }}">
+	    &nbsp;</option>
+  -->	  
 	</select>
 
       </td>
@@ -68,9 +57,9 @@
 
     <tr>
       <td align="right">
-	<label for="4">Price:&nbsp;&nbsp;</label>
+	<label>Price:&nbsp;&nbsp;</label>
       </td><td>
-	<input type="text" name="price" id="4" />
+	<div id="price"></div
       </td>
     </tr>
 
@@ -88,6 +77,63 @@
   </table>
 
 </form>
+
+
+<script>
+<!--
+
+  var xmlhttp = new XMLHttpRequest();
+  var url;
+  var rewards_array;
+
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        rewards_array = JSON.parse(xmlhttp.responseText);
+        load_rewards();
+    }
+  };
+
+  function getrewards()  {
+    url = "get_rewards_for_customer/?cid=";
+    url += document.getElementById( "cust_sel").value ;
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  }
+
+  function load_rewards()  {
+    var buf = "";
+    var i, l;
+    l = rewards_array.length;
+    for( i = 0; i < l; i++)  {
+      buf += '    <option value="' + rewards_array[i].id;
+      buf += '" data-price="' + rewards_array[i].price + '">\n';
+      buf += '      ' + rewards_array[i].name + ' - ';
+      buf += rewards_array[i].price + ' pts</option>\n';
+    }
+    document.getElementById( "item").innerHTML = buf;
+    show_price();
+  }
+
+  function show_price()  {
+    var i, l, price;
+    item = document.getElementById( "item").value;
+    price = 0;
+    l = rewards_array.length;
+    for( i = 0; i < l; i++)  {
+      if ( rewards_array[i].id == item)
+        price = rewards_array[i].price;
+    }
+    document.getElementById( "price").innerHTML = price + " points";
+  }
+
+
+  getrewards();
+
+
+  -->
+</script>
+
+
 
 
   {% include 'healthierhabits/orders/base_finish.html' %}
