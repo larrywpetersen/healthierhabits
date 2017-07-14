@@ -6,6 +6,7 @@ urlpatterns = [
     url( r'^$', views.index, name='index'),
     url( r'^index$', views.index, name='index'),
 
+
     url( r'^groups/home$', views.groups_home, name='groups_home'),
     url( r'^groups/add$', views.groups_add, name='groups_add'),
     url( r'^groups/add_action$', views.groups_add_action, name='groups_add_action'),
@@ -33,7 +34,7 @@ urlpatterns = [
     url( r'^orders/detail/(?P<orderid>[0-9]*)$', views.orders_detail, name='orders_detail'), 
     url( r'^orders/edit/(?P<orderid>[0-9]*)$', views.orders_edit, name='orders_edit'), 
     url( r'^orders/csv$', views.orders_csv, name='orders_csv'),
-    
+
 
     url( r'^rewards/home$', views.rewards_home, name='rewards_home'),
     url( r'^rewards/add$', views.rewards_add, name='rewards_add'), 
@@ -45,7 +46,12 @@ urlpatterns = [
     url( r'^rewards/csv$', views.rewards_csv, name='rewards_csv'),
 
 
-    url( r'^orders/get_rewards_for_customer/$', views.get_rewards_for_customer, name='get_rewards_for_customer'),
+
+
+    url( r'^get_rewards_for_customer/$', views.get_rewards_for_customer, name='get_rewards_for_customer'),
+    url( r'^get_customer_profile/$', views.get_customer_profile, name='get_customer_profile'),
+    url( r'^get_customer_orders/$', views.get_customer_orders, name='get_customer_orders'),
+
 
 ]
 
